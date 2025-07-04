@@ -8,6 +8,7 @@ import time
 import unicodedata
 import logging
 from flask_cors import CORS
+import shutil
 
 # Sadece convert_bookmarks_web modülünü import et
 from convert_bookmarks_web import convert_bookmarks_to_html
@@ -58,7 +59,7 @@ def download_file(filename):
         except Exception: pass
     return send_file(file_path, as_attachment=True)
 
-# --- outputs klasörünü her saat başı temizleyen fonksiyon ---
+# --- outputs klasörünü beş dakikada temizleyen fonksiyon ---
 def clean_outputs_folder():
     while True:
         now = time.time()
@@ -78,6 +79,40 @@ def clean_outputs_folder():
 
 # Temizlik threadini başlat
 threading.Thread(target=clean_outputs_folder, daemon=True).start()
+
+# --- outputs klasörünü her gün temizleyen fonksiyon ---
+def clean_outputs_folder_daily():
+    while True:
+        folder = app.config['OUTPUT_FOLDER']
+        for fname in os.listdir(folder):
+            fpath = os.path.join(folder, fname)
+            try:
+                if os.path.isfile(fpath):
+                    os.remove(fpath)
+            except Exception:
+                pass
+        time.sleep(86400)  # 24 saat (60*60*24)
+
+# Günlük temizlik threadini başlat
+threading.Thread(target=clean_outputs_folder_daily, daemon=True).start()
+
+# --- uploads klasörünü her gün temizleyen fonksiyon ---
+def clean_uploads_folder_daily():
+    while True:
+        folder = app.config['UPLOAD_FOLDER']
+        for fname in os.listdir(folder):
+            fpath = os.path.join(folder, fname)
+            try:
+                if os.path.isfile(fpath):
+                    os.remove(fpath)
+                elif os.path.isdir(fpath):
+                    shutil.rmtree(fpath)
+            except Exception:
+                pass
+        time.sleep(86400)  # 24 saat (60*60*24)
+
+# Günlük uploads temizlik threadini başlat
+threading.Thread(target=clean_uploads_folder_daily, daemon=True).start()
 
 def slugify(value):
     value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
@@ -145,5 +180,5 @@ def convert():
         except:
             pass
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000) 
+# if __name__ == '__main__':
+#     app.run(debug=True, host='0.0.0.0', port=5000) 
