@@ -1,4 +1,6 @@
 # ⭐ Yer İmi Oluşturucu & Dönüştürücü (Bookmark HTML Converter)
+## _Canlı Ortam - Production Environment_
+
 
 ✨ Kişisel yer imlerinizi (bookmarks) modern, şık ve mobil uyumlu bir HTML sayfasına dönüştürün veya sıfırdan kendi bookmark dosyanızı oluşturun! 
 **Tamamen ücretsiz, reklamsız ve limitsiz.** Türkçe ve İngilizce dil desteğiyle, tüm cihaz ve tarayıcılarda sorunsuz çalışır.
@@ -92,10 +94,10 @@ python app.py
 
 # veya production için:
 gunicorn app:app
-```
 
-Tarayıcıda açın:  
+#Tarayıcıda açın:
 `http://localhost:5000`
+```
 
 ---
 
@@ -120,7 +122,7 @@ Uygulama arayüzü iki ana bölümden oluşur: Sol tarafta sıfırdan yer imi ol
 - Oluşturulan dosyayı tek tıkla indirin.
 
 <p align="center">
-  <img src="https://i.imgur.com/EdKP2Am.png" width="500"/>
+  <img src="https://i.imgur.com/EdKP2Am.png" width="400"/>
 </p>
 
 - Örnek HTML Çıktı:
@@ -145,7 +147,7 @@ Uygulama arayüzü iki ana bölümden oluşur: Sol tarafta sıfırdan yer imi ol
 - Örnek HTML Çıktı:
 
 <p align="center">
-  <img src="https://i.imgur.com/4uJfLE6.png" width="500"/>
+  <img src="https://i.imgur.com/SddpkjA.png" width="600"/>
 </p>
 
 ---

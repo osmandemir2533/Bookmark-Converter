@@ -180,5 +180,7 @@ def convert():
         except:
             pass
 
-# if __name__ == '__main__':
-#     app.run(debug=True, host='0.0.0.0', port=5000) 
+# Local Geliştirme Ortamı için aşağıdaki kodları(185-186) yorum satırlarını kaldır terminalde python app.py yaz
+# Canlıya almak istersen aşağıdaki kodları(185-186) yorum satırına al gunicorn app:app ile Render da çalışır sadece
+#if __name__ == '__main__':
+    #app.run(debug=True, host='0.0.0.0', port=5000)
